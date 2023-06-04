@@ -14,7 +14,7 @@ export class UsersService {
   async createUser(dto: CreateUserDto){
     return await this.repository.save({
       ...dto,
-      type: 'ADMIN'
+      type: 'USER'
     });
   }
 
