@@ -57,6 +57,11 @@ export class FlightsService {
     });
   }
 
+  async getFlightsByParams(date: String, fromCity: string, intoCity: string){
+    const validFlight = await this.getValidFlights();
+    return validFlight.filter((flight) => flight.flightDate === date && flight.fromCity.toLowerCase().includes(fromCity) && flight.intoCity.toLowerCase().includes(intoCity));
+  }
+
   //покаызваем только те рейсы, где дата вылета младше текущего выремени
   async getValidFlights(){
     const flights = await this.repository.find();

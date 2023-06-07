@@ -63,8 +63,13 @@ export class FlightsController {
     return this.flightsService.getValidFlightsWithTickets();
   }
 
-  // @Get('/sum')
-  // getSum(){
-  //   return this.flightsService.findAllPriceFlight();
-  // }
+
+  @Get('/valid_by_params')
+  getFlightsByParams(
+    @Query('date') date: string,
+    @Query('fromCity') fromCity: string,
+    @Query('intoCity') intoCity: string
+  ){
+    return this.flightsService.getFlightsByParams(date, fromCity.toLocaleLowerCase(), intoCity.toLowerCase());
+  }
 }
