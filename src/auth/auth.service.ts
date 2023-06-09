@@ -54,7 +54,8 @@ export class AuthService {
         passportNumber: user.passportNumber,
         dob: user.dob,
         type: user.type
-      })
+      }),
+      role: user.type
     }
   }
 }
