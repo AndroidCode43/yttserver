@@ -64,4 +64,15 @@ export class TicketsController {
   getTodayTickets(){
     return this.ticketsService.getTicketsCreatedToday();
   }
+
+  @Get('/by_params')
+  @UseGuards(TypeGuard)
+  @Types('ADMIN')
+  getTicketsByParams(
+    @Query('userName') userName: string,
+    @Query('flightName') flightName: string,
+    @Query('flightDate') flightDate: string
+  ){
+    return this.ticketsService.searchTicketsByParams(userName, flightName, flightDate);
+  }
 }

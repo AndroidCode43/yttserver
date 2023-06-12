@@ -125,4 +125,11 @@ export class TicketsService {
         .createQueryBuilder('tickets')
         .select('SUM(tickets.price)').getRawOne();
     }
-}
+
+    async searchTicketsByParams(userName: string, flightName: string, flightData: string){
+      const tickets = await this.getAll();
+      return tickets.filter((ticket) => ticket.passengerName.includes(userName) 
+      && ticket.flight.nameFlight.includes(flightName) 
+      && ticket.flight.flightDate.includes(flightData));
+    }
+  }
