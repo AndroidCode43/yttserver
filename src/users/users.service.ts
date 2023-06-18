@@ -71,4 +71,14 @@ export class UsersService {
       balance: findUser.balance - amount
     });
   }
+
+  async deleteUser(userId: number){
+    const findUser = await this.repository.findOne({where: {id: userId}});
+    
+    if(findUser){
+      throw new HttpException('Такой пользователь не найден!', HttpStatus.BAD_REQUEST);
+    }
+  
+    return await this.repository.delete(findUser);
+  }
 }

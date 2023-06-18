@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards, UsePipes, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Post, UseGuards, UsePipes, ValidationPipe, Param} from "@nestjs/common";
 import { UsersService } from './users.service';
 import { CreateUserDto } from "./dto/CreateUser.dto";
 import { TypeGuard } from "../guards/type.guard";
@@ -15,6 +15,8 @@ export class UsersController {
     return this.usersService.createUser(dto);
   }
 
+  @UseGuards(TypeGuard)
+  @Types('ADMIN')
   @Get('/all')
   getAll(){
     return this.usersService.getAll();
@@ -43,5 +45,14 @@ export class UsersController {
     @Body() dto: BalanceTopUpDto
   ){
     return this.usersService.balanceTopUp(dto, id);
+  }
+
+  @UseGuards(TypeGuard)
+  @Types('ADMIN')
+  @Delete('/delete/:id')
+  deleteUser(
+    @Param('id') userId: number
+    ){
+      return this.usersService.deleteUser(userId);
   }
 }
