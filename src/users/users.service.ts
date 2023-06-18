@@ -75,7 +75,7 @@ export class UsersService {
   async deleteUser(userId: number){
     const findUser = await this.repository.findOne({where: {id: userId}});
     
-    if(findUser){
+    if(!findUser){
       throw new HttpException('Такой пользователь не найден!', HttpStatus.BAD_REQUEST);
     }
   
