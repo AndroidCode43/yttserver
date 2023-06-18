@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Post, UseGuards, UsePipes, ValidationPipe, Param} from "@nestjs/common";
+import { Body, Controller, Delete, Get, Post, UseGuards, UsePipes, ValidationPipe, Param, Query} from "@nestjs/common";
 import { UsersService } from './users.service';
 import { CreateUserDto } from "./dto/CreateUser.dto";
 import { TypeGuard } from "../guards/type.guard";
@@ -54,5 +54,16 @@ export class UsersController {
     @Param('id') userId: number
     ){
       return this.usersService.deleteUser(userId);
+  }
+
+  @Post('/param')
+  @UseGuards(TypeGuard)
+  @Types('ADMIN')
+  findUserByParam(
+    @Query('name') name: string,
+    @Query('passportNumber') passportNumber: string,
+    @Query('dob') dob: string
+  ){
+    return this.usersService.findUserByParams(name, passportNumber, dob);
   }
 }

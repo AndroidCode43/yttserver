@@ -81,4 +81,9 @@ export class UsersService {
   
     return await this.repository.delete(findUser);
   }
+
+  async findUserByParams(name: string, passportNumber: string, dob: string){
+    const users = await this.repository.find();
+    return users.filter((user) => user.name.includes(name) && user.passportNumber.includes(passportNumber) && user.dob.includes(dob));
+  }
 }
