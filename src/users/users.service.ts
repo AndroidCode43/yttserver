@@ -64,7 +64,7 @@ export class UsersService {
     const findUser = await this.findUserById(userId);
 
     if(findUser.balance < amount){
-      throw new HttpException('Не хватает средств для оплаты билета!', HttpStatus.BAD_REQUEST);
+      throw new HttpException('Не хватает средств для оплаты билета! Перейдите в личный кабинет для пополнения баланса.', HttpStatus.BAD_REQUEST);
     }
 
     return await this.repository.update(findUser.id, {

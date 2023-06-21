@@ -34,7 +34,9 @@ export class TicketEntity{
   @IsNotEmpty()
   seatNumber: number;
 
-  @ManyToOne(() => UserEntity, (user) => user.tickets)
+  @ManyToOne(() => UserEntity, (user) => user.tickets, {
+    onDelete: "CASCADE"
+  })
   users: UserEntity;
 
   @IsNotEmpty()

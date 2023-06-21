@@ -29,6 +29,8 @@ export class UserEntity {
   balance: number;
 
   @OneToMany(() => TicketEntity,
-    (ticket) => ticket.users)
+    (ticket) => ticket.users, {
+      onDelete: "CASCADE"
+    })
   tickets: TicketEntity[]
 }
